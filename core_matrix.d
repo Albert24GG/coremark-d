@@ -46,7 +46,7 @@ enum string matrix_clip(string x, string y) = `((` ~ y ~ `) ? (` ~ x ~ `)&0x0ff 
 enum string matrix_big(string x) = `(0xf000 | (` ~ x ~ `))`;
 enum string bit_extract(string x, string from, string to) = `(((` ~ x ~ `) >> (` ~ from ~ `)) & (~(0xffffffff << (` ~ to ~ `))))`;
 
-static if (CORE_DEBUG)
+version (CORE_DEBUG)
 {
     void printmat(MATDAT* A, ee_u32 N, char* name)
     {
@@ -129,31 +129,31 @@ ee_s16 matrix_test(ee_u32 N, MATRES* C, MATDAT* A, MATDAT* B, MATDAT val)
     MATDAT clipval = cast(MATDAT) mixin(matrix_big!(`val`));
 
     matrix_add_const(N, A, val); /* make sure data changes  */
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         printmat(A, N, cast(char*) "matrix_add_const");
     }
     matrix_mul_const(N, C, A, val);
     crc = crc16(matrix_sum(N, C, clipval), crc);
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         printmatC(C, N, cast(char*) "matrix_mul_const");
     }
     matrix_mul_vect(N, C, A, B);
     crc = crc16(matrix_sum(N, C, clipval), crc);
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         printmatC(C, N, cast(char*) "matrix_mul_vect");
     }
     matrix_mul_matrix(N, C, A, B);
     crc = crc16(matrix_sum(N, C, clipval), crc);
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         printmatC(C, N, cast(char*) "matrix_mul_matrix");
     }
     matrix_mul_matrix_bitextract(N, C, A, B);
     crc = crc16(matrix_sum(N, C, clipval), crc);
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         printmatC(C, N, cast(char*) "matrix_mul_matrix_bitextract");
     }
@@ -216,7 +216,7 @@ ee_u32 core_init_matrix(ee_u32 blksize, void* memblk, ee_s32 seed, mat_params* p
     p.B = B;
     p.C = cast(MATRES*) mixin(align_mem!"B + N * N");
     p.N = N;
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         printmat(A, N, cast(char*) "A");
         printmat(B, N, cast(char*) "B");

@@ -160,7 +160,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
     results[0].seed2 = mixin(get_seed!(`2`));
     results[0].seed3 = mixin(get_seed!(`3`));
     results[0].iterations = mixin(get_seed_32!(`4`));
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         results[0].iterations = 1;
     }

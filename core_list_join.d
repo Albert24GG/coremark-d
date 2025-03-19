@@ -187,7 +187,7 @@ ee_u16 core_bench_list(core_results* res, ee_s16 finder_idx)
         if (info.idx >= 0)
             info.idx++;
 
-        static if (CORE_DEBUG)
+        version (CORE_DEBUG)
         {
             ee_printf("List find %d: [%d,%d,%d]\n", i, retval, missed, found);
         }
@@ -208,7 +208,7 @@ ee_u16 core_bench_list(core_results* res, ee_s16 finder_idx)
         finder = finder.next;
     }
 
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         ee_printf("List sort 1: %04x\n", retval);
     }
@@ -223,7 +223,7 @@ ee_u16 core_bench_list(core_results* res, ee_s16 finder_idx)
         finder = finder.next;
     }
 
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         ee_printf("List sort 2: %04x\n", retval);
     }
@@ -298,7 +298,7 @@ list_head* core_list_init(ee_u32 blksize, list_head* memblock, ee_s16 seed)
         finder = finder.next;
     }
     list = core_list_mergesort(list, &cmp_idx, null);
-    static if (CORE_DEBUG)
+    version (CORE_DEBUG)
     {
         ee_printf("Initialized list:\n");
         finder = list;
@@ -573,7 +573,7 @@ list_head* core_list_mergesort(list_head* list, list_cmp cmp, core_results* res)
         /* Otherwise repeat, merging lists twice the size */
         insize *= 2;
     }
-    static if (COMPILER_REQUIRES_SORT_RETURN)
+    version (COMPILER_REQUIRES_SORT_RETURN)
     {
         return list;
     }

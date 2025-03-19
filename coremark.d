@@ -37,10 +37,6 @@ enum MEM_STATIC = 0;
 enum MEM_MALLOC = 1;
 enum MEM_STACK = 2;
 
-// TODO: figure out how to handle this
-enum CORE_DEBUG = false;
-enum COMPILER_REQUIRES_SORT_RETURN = false;
-
 public import posix.core_portme_h;
 
 static if (HAS_STDIO)

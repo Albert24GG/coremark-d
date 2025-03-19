@@ -24,14 +24,11 @@ import core.stdc.stdio;
 import core.stdc.stdlib;
 import coremark;
 
-// TODO: figure out how to handle this
-enum CALLGRIND_RUN = true;
-
-static if (CALLGRIND_RUN)
+version (CALLGRIND_RUN)
 {
 
-    extern (C) void callgrind_start();
-    extern (C) void callgrind_stop();
+    void callgrind_start();
+    void callgrind_stop();
 
 }
 
@@ -177,14 +174,12 @@ static if (SAMPLE_TIME_IMPLEMENTATION)
     void start_time()
     {
         mixin(GETMYTIME!(`&start_time_val`));
-        static if (CALLGRIND_RUN)
+        version (CALLGRIND_RUN)
         {
             callgrind_start();
         }
 
-        // TODO: figure out how to handle this
-        enum MICA = false;
-        static if (MICA)
+        version (MICA)
         {
             asm
             {
@@ -202,14 +197,12 @@ static if (SAMPLE_TIME_IMPLEMENTATION)
 */
     void stop_time()
     {
-        static if (CALLGRIND_RUN)
+        version (CALLGRIND_RUN)
         {
             callgrind_stop();
         }
 
-        // TODO: figure out how to handle this
-        enum MICA = false;
-        static if (MICA)
+        version (MICA)
         {
             asm
             {
@@ -259,9 +252,7 @@ ee_u32 default_num_contexts = MULTITHREAD;
 void portable_init(core_portable* p, int* argc, char** argv)
 {
 
-    // TODO: figure out how to handle this
-    enum PRINT_ARGS = true;
-    static if (PRINT_ARGS)
+    version (PRINT_ARGS)
     {
         int i = void;
         for (i = 0; i < *argc; i++)
