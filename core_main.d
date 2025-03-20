@@ -102,7 +102,7 @@ else
 
 }
 
-static if ((MEM_METHOD == MEM_STATIC))
+static if (MEM_METHOD == MEM_STATIC)
 {
     ee_u8[TOTAL_DATA_SIZE] static_memblk;
 }
@@ -144,7 +144,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
     ee_u16 seedcrc = 0;
     CORE_TICKS total_time = void;
     core_results[MULTITHREAD] results = void;
-    static if ((MEM_METHOD == MEM_STACK))
+    static if (MEM_METHOD == MEM_STACK)
     {
         ee_u8[TOTAL_DATA_SIZE * MULTITHREAD] stack_memblock = void;
     }
@@ -184,17 +184,17 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
         results[0].seed2 = 0x3415;
         results[0].seed3 = 0x66;
     }
-    static if ((MEM_METHOD == MEM_STATIC))
+    static if (MEM_METHOD == MEM_STATIC)
     {
         results[0].memblock[0] = cast(void*) static_memblk;
         results[0].size = TOTAL_DATA_SIZE;
         results[0].err = 0;
-        static if ((MULTITHREAD > 1))
+        static if (MULTITHREAD > 1)
         {
             static assert(0, "Cannot use a static data area with multiple contexts!");
         }
     }
-    else static if ((MEM_METHOD == MEM_MALLOC))
+    else static if (MEM_METHOD == MEM_MALLOC)
     {
         for (i = 0; i < MULTITHREAD; i++)
         {
@@ -211,7 +211,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
             results[i].execs = results[0].execs;
         }
     }
-    else static if ((MEM_METHOD == MEM_STACK))
+    else static if (MEM_METHOD == MEM_STACK)
     {
         for (i = 0; i < MULTITHREAD; i++)
         {
@@ -298,7 +298,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
     }
     /* perform actual benchmark */
     start_time();
-    static if ((MULTITHREAD > 1))
+    static if (MULTITHREAD > 1)
     {
         if (default_num_contexts > MULTITHREAD)
         {
@@ -422,7 +422,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
         cast(c_ulong) default_num_contexts * results[0].iterations);
     ee_printf("Compiler version : %s\n", cast(char*) COMPILER_VERSION);
     ee_printf("Compiler flags   : %s\n", cast(char*) COMPILER_FLAGS);
-    static if ((MULTITHREAD > 1))
+    static if (MULTITHREAD > 1)
     {
         ee_printf("Parallel %s : %d\n", PARALLEL_METHOD, default_num_contexts);
     }
@@ -463,7 +463,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
                     ee_printf(" / %s", mem_name[MEM_METHOD]);
                 }
 
-                static if ((MULTITHREAD > 1))
+                static if (MULTITHREAD > 1)
                 {
                     ee_printf(" / %d:%s", default_num_contexts, PARALLEL_METHOD);
                 }
@@ -478,7 +478,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
             "Cannot validate operation for these seed values, please compare "
                 ~ "with results on a known platform.\n");
 
-    static if ((MEM_METHOD == MEM_MALLOC))
+    static if (MEM_METHOD == MEM_MALLOC)
     {
         for (i = 0; i < MULTITHREAD; i++)
             portable_free(results[i].memblock[0]);

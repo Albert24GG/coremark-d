@@ -186,7 +186,7 @@ struct core_results
 }
 
 /* Multicore execution handling */
-static if ((MULTITHREAD > 1))
+static if (MULTITHREAD > 1)
 {
     ee_u8 core_start_parallel(core_results* res);
     ee_u8 core_stop_parallel(core_results* res);

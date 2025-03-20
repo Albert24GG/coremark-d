@@ -131,7 +131,7 @@ else static if (SEED_METHOD == SEED_ARG)
     }
 
 }
-else static if ((SEED_METHOD == SEED_FUNC))
+else static if (SEED_METHOD == SEED_FUNC)
 {
     /* If using OS based function, you must define and implement the functions below
  * in core_portme.h and core_portme.c ! */

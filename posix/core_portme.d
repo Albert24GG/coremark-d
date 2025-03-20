@@ -62,7 +62,7 @@ else
     }
 }
 
-static if ((SEED_METHOD == SEED_VOLATILE))
+static if (SEED_METHOD == SEED_VOLATILE)
 {
     static if (VALIDATION_RUN)
     {
@@ -274,7 +274,7 @@ void portable_init(core_portable* p, int* argc, char** argv)
     {
         ee_printf("ERROR! Please define ee_u32 to a 32b unsigned type!\n");
     }
-    static if ((MAIN_HAS_NOARGC && (SEED_METHOD == SEED_ARG)))
+    static if (MAIN_HAS_NOARGC && (SEED_METHOD == SEED_ARG))
     {
         ee_printf(
             "ERROR! Main has no argc, but SEED_METHOD defined to SEED_ARG!\n");
@@ -307,7 +307,7 @@ void portable_fini(core_portable* p)
     p.portable_id = 0;
 }
 
-static if ((MULTITHREAD > 1))
+static if (MULTITHREAD > 1)
 {
 
     /* Function: core_start_parallel

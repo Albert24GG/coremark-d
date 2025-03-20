@@ -252,7 +252,7 @@ enum MAIN_HAS_NORETURN = 0;
 */
 extern ee_u32 default_num_contexts;
 
-static if ((MULTITHREAD > 1))
+static if (MULTITHREAD > 1)
 {
     static if (USE_PTHREAD)
     {
@@ -293,7 +293,7 @@ static if ((MULTITHREAD > 1))
 
 struct core_portable
 {
-    static if ((MULTITHREAD > 1))
+    static if (MULTITHREAD > 1)
     {
         static if (USE_PTHREAD)
         {
@@ -323,13 +323,13 @@ void portable_fini(core_portable* p);
 /* static if (SEED_METHOD == SEED_VOLATILE) */
 static if (SEED_METHOD == 2)
 {
-    static if ((VALIDATION_RUN || PERFORMANCE_RUN || PROFILE_RUN))
+    static if (VALIDATION_RUN || PERFORMANCE_RUN || PROFILE_RUN)
     {
         enum RUN_TYPE_FLAG = 1;
     }
     else
     {
-        static if ((TOTAL_DATA_SIZE == 1200))
+        static if (TOTAL_DATA_SIZE == 1200)
         {
             enum PROFILE_RUN = 1;
         }
