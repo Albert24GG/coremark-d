@@ -61,7 +61,7 @@ enum HAS_PRINTF = 1;
 /* Configuration: CORE_TICKS
         Define type of return from the timing functions.
  */
-version (_MSC_VER)
+version (Windows)
 {
     public import core.sys.windows.windows;
 
@@ -86,11 +86,11 @@ version (COMPILER_VERSION)
 }
 else
 {
-    version (__clang__)
+    version (LDC)
     {
         enum COMPILER_VERSION = __VERSION__;
     }
-    else version (__GNUC__)
+    else version (GNU)
     {
         import std.conv;
 

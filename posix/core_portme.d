@@ -120,7 +120,7 @@ static if (USE_CLOCK)
     enum TIMER_RES_DIVIDER = 1;
     enum SAMPLE_TIME_IMPLEMENTATION = 1;
 }
-else version (_MSC_VER)
+else version (Windows)
 {
     enum NSECS_PER_SEC = 10_000_000;
     enum EE_TIMER_TICKER_RATE = 1_000;
