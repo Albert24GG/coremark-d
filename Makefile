@@ -37,6 +37,6 @@ $(GDC_BIN): $(C_OBJECTS) $(D_SOURCES) $(POSIX_SOURCES)
 
 # Clean rule
 clean:
-	rm -f $(LDC_BIN) $(GDC_BIN) $(C_OBJECTS)
+	rm -f $(LDC_BIN) $(LDC_BIN).o $(GDC_BIN) $(GDC_BIN).o $(C_OBJECTS)
 
 .PHONY: all clean
