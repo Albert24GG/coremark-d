@@ -1,0 +1,15 @@
+FROM arm64v8/ubuntu:latest
+
+COPY ./arm-build-script.sh ./
+
+# Disable interactive prompts during package installs
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y build-essential clang ldc gdc valgrind && \
+    rm -rf /var/lib/apt/lists/*
+
+VOLUME /coremark-d-source
+VOLUME /output
+
+ENTRYPOINT ["./arm-build-script.sh"]
