@@ -24,7 +24,7 @@ make clean
 1. Install all dependencies for emulating arm on x86_64:
 
 ```bash
-paru -Q qemu-base qemu-user-static qemu-user-binfmt
+paru -S qemu-base qemu-user-static qemu-user-binfmt
 ```
 
 2. Register the qemu binary format interpreter:
