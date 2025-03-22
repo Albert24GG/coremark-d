@@ -424,7 +424,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
     ee_printf("Compiler flags   : %s\n", cast(char*) COMPILER_FLAGS);
     static if (MULTITHREAD > 1)
     {
-        ee_printf("Parallel %s : %d\n", PARALLEL_METHOD, default_num_contexts);
+        ee_printf("Parallel %s : %d\n", cast(char*) PARALLEL_METHOD, default_num_contexts);
     }
     ee_printf("Memory location  : %s\n", cast(char*) MEM_LOCATION);
     /* output for verification */
@@ -456,7 +456,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
                         cast(char*) COMPILER_FLAGS);
                 static if (HasVersion!"MEM_LOCATION" && !HasVersion!"MEM_LOCATION_UNSPEC")
                 {
-                    ee_printf(" / %s", MEM_LOCATION);
+                    ee_printf(" / %s", cast(char*) MEM_LOCATION);
                 }
                 else
                 {
@@ -465,7 +465,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
 
                 static if (MULTITHREAD > 1)
                 {
-                    ee_printf(" / %d:%s", default_num_contexts, PARALLEL_METHOD);
+                    ee_printf(" / %d:%s", default_num_contexts, cast(char*) PARALLEL_METHOD);
                 }
                 ee_printf("\n");
             }
