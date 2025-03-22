@@ -106,8 +106,9 @@ static if (MEM_METHOD == MEM_STATIC)
 {
     ee_u8[TOTAL_DATA_SIZE] static_memblk;
 }
-char*[3] mem_name = [
-    cast(char*) "Static", cast(char*) "Heap", cast(char*) "Stack"
+const(char)*[3] mem_name = [
+    cast(const(char)*) "Static", cast(const(char)*) "Heap",
+    cast(const(char)*) "Stack"
 ];
 /* Function: main
         Main entry routine for the benchmark.
@@ -420,13 +421,13 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
 
     ee_printf("Iterations       : %lu\n",
         cast(c_ulong) default_num_contexts * results[0].iterations);
-    ee_printf("Compiler version : %s\n", cast(char*) COMPILER_VERSION);
-    ee_printf("Compiler flags   : %s\n", cast(char*) COMPILER_FLAGS);
+    ee_printf("Compiler version : %s\n", cast(const(char)*) COMPILER_VERSION);
+    ee_printf("Compiler flags   : %s\n", cast(const(char)*) COMPILER_FLAGS);
     static if (MULTITHREAD > 1)
     {
-        ee_printf("Parallel %s : %d\n", cast(char*) PARALLEL_METHOD, default_num_contexts);
+        ee_printf("Parallel %s : %d\n", cast(const(char)*) PARALLEL_METHOD, default_num_contexts);
     }
-    ee_printf("Memory location  : %s\n", cast(char*) MEM_LOCATION);
+    ee_printf("Memory location  : %s\n", cast(const(char)*) MEM_LOCATION);
     /* output for verification */
     ee_printf("seedcrc          : 0x%04x\n", seedcrc);
     if (results[0].execs & ID_LIST)
@@ -452,11 +453,11 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
                 ee_printf("CoreMark 1.0 : %f / %s %s",
                     default_num_contexts * results[0].iterations
                         / time_in_secs(total_time),
-                        cast(char*) COMPILER_VERSION,
-                        cast(char*) COMPILER_FLAGS);
+                        cast(const(char)*) COMPILER_VERSION,
+                        cast(const(char)*) COMPILER_FLAGS);
                 static if (HasVersion!"MEM_LOCATION" && !HasVersion!"MEM_LOCATION_UNSPEC")
                 {
-                    ee_printf(" / %s", cast(char*) MEM_LOCATION);
+                    ee_printf(" / %s", cast(const(char)*) MEM_LOCATION);
                 }
                 else
                 {
@@ -465,7 +466,7 @@ MAIN_RETURN_TYPE main(int argc, char** argv)
 
                 static if (MULTITHREAD > 1)
                 {
-                    ee_printf(" / %d:%s", default_num_contexts, cast(char*) PARALLEL_METHOD);
+                    ee_printf(" / %d:%s", default_num_contexts, cast(const(char)*) PARALLEL_METHOD);
                 }
                 ee_printf("\n");
             }

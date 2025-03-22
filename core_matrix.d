@@ -48,7 +48,7 @@ enum string bit_extract(string x, string from, string to) = `(((` ~ x ~ `) >> (`
 
 version (CORE_DEBUG)
 {
-    void printmat(MATDAT* A, ee_u32 N, char* name)
+    void printmat(MATDAT* A, ee_u32 N, const(char)* name)
     {
         ee_u32 i = void, j = void;
         ee_printf("Matrix %s [%dx%d]:\n", name, N, N);
@@ -64,7 +64,7 @@ version (CORE_DEBUG)
         }
     }
 
-    void printmatC(MATRES* C, ee_u32 N, char* name)
+    void printmatC(MATRES* C, ee_u32 N, const(char)* name)
     {
         ee_u32 i = void, j = void;
         ee_printf("Matrix %s [%dx%d]:\n", name, N, N);
@@ -131,31 +131,31 @@ ee_s16 matrix_test(ee_u32 N, MATRES* C, MATDAT* A, MATDAT* B, MATDAT val)
     matrix_add_const(N, A, val); /* make sure data changes  */
     version (CORE_DEBUG)
     {
-        printmat(A, N, cast(char*) "matrix_add_const");
+        printmat(A, N, cast(const(char)*) "matrix_add_const");
     }
     matrix_mul_const(N, C, A, val);
     crc = crc16(matrix_sum(N, C, clipval), crc);
     version (CORE_DEBUG)
     {
-        printmatC(C, N, cast(char*) "matrix_mul_const");
+        printmatC(C, N, cast(const(char)*) "matrix_mul_const");
     }
     matrix_mul_vect(N, C, A, B);
     crc = crc16(matrix_sum(N, C, clipval), crc);
     version (CORE_DEBUG)
     {
-        printmatC(C, N, cast(char*) "matrix_mul_vect");
+        printmatC(C, N, cast(const(char)*) "matrix_mul_vect");
     }
     matrix_mul_matrix(N, C, A, B);
     crc = crc16(matrix_sum(N, C, clipval), crc);
     version (CORE_DEBUG)
     {
-        printmatC(C, N, cast(char*) "matrix_mul_matrix");
+        printmatC(C, N, cast(const(char)*) "matrix_mul_matrix");
     }
     matrix_mul_matrix_bitextract(N, C, A, B);
     crc = crc16(matrix_sum(N, C, clipval), crc);
     version (CORE_DEBUG)
     {
-        printmatC(C, N, cast(char*) "matrix_mul_matrix_bitextract");
+        printmatC(C, N, cast(const(char)*) "matrix_mul_matrix_bitextract");
     }
 
     matrix_add_const(N, A, cast(MATDAT)-val); /* return matrix to initial value */
@@ -218,8 +218,8 @@ ee_u32 core_init_matrix(ee_u32 blksize, void* memblk, ee_s32 seed, mat_params* p
     p.N = N;
     version (CORE_DEBUG)
     {
-        printmat(A, N, cast(char*) "A");
-        printmat(B, N, cast(char*) "B");
+        printmat(A, N, cast(const(char)*) "A");
+        printmat(B, N, cast(const(char)*) "B");
     }
     return N;
 }
