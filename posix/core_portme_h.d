@@ -88,7 +88,9 @@ else
 {
     version (LDC)
     {
-        enum COMPILER_VERSION = __VERSION__;
+        import std.conv;
+
+        enum COMPILER_VERSION = to!string(__VERSION__);
     }
     else version (GNU)
     {
