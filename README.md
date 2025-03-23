@@ -23,8 +23,16 @@ make clean
 
 1. Install all dependencies for emulating arm on x86_64:
 
+- Arch Linux:
+
 ```bash
-paru -S qemu-base qemu-user-static qemu-user-binfmt
+pacman -S qemu-base qemu-user-static qemu-user-binfmt
+```
+
+- Ubuntu:
+
+```bash
+apt install qemu binfmt-support qemu-user-static
 ```
 
 2. Register the qemu binary format interpreter:
